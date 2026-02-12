@@ -1,0 +1,184 @@
+/* ============================================
+   INTERACTIVE FLOW
+   ============================================ */
+
+.flow-section {
+    gap: var(--space-md);
+    z-index: 1;
+}
+
+/* Messages wrapper */
+.flow-messages-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    width: 100%;
+}
+
+/* ============================================
+   INTRO NOTE — "Cherish every word"
+   ============================================ */
+
+.flow-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    text-align: center;
+    max-width: 480px;
+    padding: var(--space-lg);
+}
+
+.flow-intro-icon {
+    font-size: 3.5rem;
+    display: block;
+    filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.5));
+}
+
+.flow-intro-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 6vw, 3rem);
+    color: var(--color-pink-light);
+    text-shadow: 0 0 25px rgba(255, 105, 180, 0.3);
+}
+
+.flow-intro-text {
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+    color: var(--color-text-secondary);
+    line-height: 2;
+    font-style: italic;
+    font-weight: 300;
+}
+
+.flow-intro-hint {
+    font-size: 0.9rem;
+    color: var(--color-gold-soft);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+/* Progress bar */
+.flow-progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 10;
+}
+
+.flow-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-pink), var(--color-gold));
+    border-radius: 0 2px 2px 0;
+}
+
+/* Progress dots */
+.flow-progress-dots {
+    display: flex;
+    gap: 10px;
+    margin-bottom: var(--space-sm);
+}
+
+.flow-dot {
+    font-size: 0.8rem;
+    transition: all var(--transition-normal);
+    filter: grayscale(0.3);
+}
+
+.flow-dot.active {
+    filter: none;
+    transform: scale(1.15);
+}
+
+/* Card */
+.flow-card {
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-xl) var(--space-lg);
+    position: relative;
+}
+
+.flow-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(255, 105, 180, 0.4), rgba(255, 215, 0, 0.2), rgba(233, 30, 99, 0.4));
+    z-index: -1;
+    opacity: 0.5;
+}
+
+/* Emoji */
+.flow-emoji {
+    font-size: 3.5rem;
+    display: block;
+    filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.5));
+}
+
+/* Title */
+.flow-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    color: var(--color-pink-light);
+    text-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+}
+
+/* Divider */
+.flow-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+    border-radius: 1px;
+}
+
+/* Text */
+.flow-text {
+    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+    color: var(--color-text-secondary);
+    max-width: 440px;
+    line-height: 1.9;
+}
+
+/* Button */
+.flow-btn {
+    margin-top: var(--space-xs);
+}
+
+/* Counter */
+.flow-counter {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    font-weight: 300;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .flow-card {
+        padding: var(--space-lg) var(--space-md);
+    }
+
+    .flow-emoji {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .flow-card {
+        padding: var(--space-md) var(--space-sm);
+    }
+
+    .flow-progress-dots {
+        gap: 6px;
+    }
+
+    .flow-dot {
+        font-size: 0.65rem;
+    }
+}

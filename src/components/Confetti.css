@@ -1,0 +1,25 @@
+/* ============================================
+   CONFETTI
+   ============================================ */
+
+.confetti-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.confetti-particle {
+    position: absolute;
+    top: -20px;
+    animation: confettiFall ease-out forwards;
+}
+
+.confetti-shape {
+    opacity: 0.9;
+}
+
+.confetti-emoji {
+    filter: drop-shadow(0 0 4px rgba(255, 105, 180, 0.4));
+}

@@ -1,0 +1,101 @@
+/* ============================================
+   LANDING SECTION
+   ============================================ */
+
+.landing {
+    text-align: center;
+    z-index: 1;
+}
+
+.landing-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    z-index: 2;
+    position: relative;
+}
+
+/* Heart icon */
+.heart-icon-large {
+    font-size: 5rem;
+    filter: drop-shadow(0 0 30px rgba(255, 105, 180, 0.6));
+    margin-bottom: var(--space-sm);
+}
+
+/* Title */
+.landing-title {
+    font-family: var(--font-heading);
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    color: var(--color-white);
+    text-shadow:
+        0 0 20px rgba(255, 105, 180, 0.5),
+        0 0 60px rgba(233, 30, 99, 0.3),
+        0 4px 8px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+}
+
+/* Subtitle */
+.landing-subtitle {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    color: var(--color-text-secondary);
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* Divider */
+.landing-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-pink), var(--color-gold), var(--color-pink), transparent);
+    border-radius: 1px;
+    margin: var(--space-xs) 0;
+}
+
+/* CTA Button */
+.landing-btn {
+    margin-top: var(--space-sm);
+    font-size: 1.1rem;
+    padding: 16px 48px;
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+/* Footer */
+.landing-footer {
+    position: absolute;
+    bottom: 30px;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* Sparkles */
+.sparkles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.sparkle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--color-gold);
+    border-radius: 50%;
+    animation: sparkle 3s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--color-gold), 0 0 20px var(--color-gold-soft);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .heart-icon-large {
+        font-size: 3.5rem;
+    }
+
+    .landing-btn {
+        padding: 14px 36px;
+        font-size: 1rem;
+    }
+}
