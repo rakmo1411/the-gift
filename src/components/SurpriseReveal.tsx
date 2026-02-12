@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { fadeMusic } from './MusicPlayer'
 import Confetti from './Confetti'
 import './SurpriseReveal.css'
 
@@ -10,11 +11,13 @@ import './SurpriseReveal.css'
   2 = lid flies off + golden light burst (1s)
   3 = love letter rises from the box (1s)
   4 = letter fully revealed + confetti
+  5 = finale — thank you, music fades, goodbye
 */
-type Stage = 0 | 1 | 2 | 3 | 4
+type Stage = 0 | 1 | 2 | 3 | 4 | 5
 
 function SurpriseReveal() {
     const [stage, setStage] = useState<Stage>(0)
+    const [musicFaded, setMusicFaded] = useState(false)
 
     const handleOpen = () => {
         if (stage !== 0) return
@@ -37,6 +40,13 @@ function SurpriseReveal() {
         }
     }, [stage])
 
+    // Handle finale — fade music
+    const handleFinale = () => {
+        setStage(5)
+        fadeMusic(6000)
+        setTimeout(() => setMusicFaded(true), 6500)
+    }
+
     return (
         <motion.div
             className="section surprise-section"
@@ -45,7 +55,7 @@ function SurpriseReveal() {
             transition={{ duration: 0.8 }}
         >
             {/* Confetti — appears once fully revealed */}
-            {stage >= 3 && <Confetti count={80} />}
+            {stage >= 3 && stage < 5 && <Confetti count={80} />}
 
             <AnimatePresence mode="wait">
                 {stage < 3 ? (
@@ -169,13 +179,14 @@ function SurpriseReveal() {
                             </motion.button>
                         )}
                     </motion.div>
-                ) : (
+                ) : stage <= 4 ? (
                     /* === LOVE LETTER REVEAL === */
                     <motion.div
                         key="letter-reveal"
                         className="surprise-revealed"
                         initial={{ opacity: 0, y: 60 }}
                         animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -30 }}
                         transition={{
                             duration: 1.2,
                             ease: [0.16, 1, 0.3, 1],
@@ -245,6 +256,85 @@ function SurpriseReveal() {
                         >
                             💕 💗 💖 💝 💕
                         </motion.div>
+
+                        {/* Close letter → go to finale */}
+                        <motion.button
+                            className="btn-romantic finale-btn"
+                            onClick={handleFinale}
+                            initial={{ opacity: 0, y: 15 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 3, duration: 0.8 }}
+                            whileHover={{ scale: 1.06 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            Thank You For Reading 💕
+                        </motion.button>
+                    </motion.div>
+                ) : (
+                    /* === FINALE — Goodbye === */
+                    <motion.div
+                        key="finale"
+                        className="finale-section"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1.5 }}
+                    >
+                        {/* Soft ambient glow */}
+                        <div className="finale-ambient-glow" />
+
+                        <motion.span
+                            className="finale-heart"
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ delay: 0.5, duration: 1, type: 'spring', stiffness: 80 }}
+                        >
+                            ❤️
+                        </motion.span>
+
+                        <motion.h2
+                            className="finale-title"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 1, duration: 1 }}
+                        >
+                            Happy Birthday, My Love
+                        </motion.h2>
+
+                        <motion.div
+                            className="finale-divider"
+                            initial={{ width: 0 }}
+                            animate={{ width: '100px' }}
+                            transition={{ delay: 1.5, duration: 1 }}
+                        />
+
+                        <motion.p
+                            className="finale-message"
+                            initial={{ opacity: 0, y: 15 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 2, duration: 1 }}
+                        >
+                            Thank you for being the one of the most beautiful part of my life.
+                            <br />
+                            
+                        </motion.p>
+
+                        <motion.p
+                            className="finale-submessage"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: musicFaded ? 1 : 0 }}
+                            transition={{ duration: 1.5 }}
+                        >
+                            Go celebrate your day, beautiful ✨
+                        </motion.p>
+
+                        <motion.p
+                            className="finale-credit"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: musicFaded ? 0.4 : 0 }}
+                            transition={{ duration: 1.5, delay: 0.5 }}
+                        >
+                            made with all my love, just for you ❤️
+                        </motion.p>
                     </motion.div>
                 )}
             </AnimatePresence>

@@ -22,6 +22,27 @@ export function startMusic() {
     })
 }
 
+// Gradually fade out music over a duration (ms), then pause
+export function fadeMusic(durationMs = 5000) {
+    const audio = getAudio()
+    if (audio.paused) return
+
+    const startVolume = audio.volume
+    const steps = 40
+    const interval = durationMs / steps
+    let step = 0
+
+    const fade = setInterval(() => {
+        step++
+        audio.volume = Math.max(0, startVolume * (1 - step / steps))
+        if (step >= steps) {
+            clearInterval(fade)
+            audio.pause()
+            audio.volume = startVolume // reset for if they replay
+        }
+    }, interval)
+}
+
 function MusicPlayer() {
     const [isPlaying, setIsPlaying] = useState(false)
     const [showToast, setShowToast] = useState(false)
